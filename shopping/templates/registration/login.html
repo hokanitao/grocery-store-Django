@@ -1,0 +1,61 @@
+{% extends "Master.html" %}
+
+{% block title %}
+  Login
+{% endblock title %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+          <h1 class="display-6 text-center my-5 text-primary fw-bold">
+          🛒 Welcome to Grocery Store</h1>
+          <div class="card shadow rounded p-4">
+          <h2 class="text-center mb-4">Login</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="form-floating mb-3">
+              {{ form.username }}
+              <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+              {% if form.username.errors %}
+                <div class="text-danger small">{{ form.username.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-floating mb-3">
+              {{ form.password }}
+              <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+              {% if form.password.errors %}
+                <div class="text-danger small">{{ form.password.errors }}</div>
+              {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+
+          {% if msg %}
+            <div class="alert alert-{{ msg.code }} mt-4" role="alert">
+              <strong>{{ msg.lbl }}</strong>
+            </div>
+          {% endif %}
+
+          {% comment %} <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'reset' %}">Lost Password?</a>
+            <a href="{% url 'register' %}">Sign Up</a>
+          </div> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

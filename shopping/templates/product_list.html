@@ -1,0 +1,42 @@
+{% extends "Master.html" %}
+
+{% block title %}
+  Product List
+{% endblock title %}
+
+
+{% block content %}
+  <div class="container py-4">
+    <h5 class="text-success border-bottom pb-2 mb-4">Products</h5>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-success">
+          <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            {% if is_customer %}
+              <th scope="col"></th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+            <tr>
+              <td>{{product.id}}</td>
+              <td class="fw-semibold">{{product.name}}</td>
+              <td>${{product.price}}</td>
+              {% if is_customer %}
+                <td>
+                  <a href="{% url "added" %}?product_id={{ product.id }}" class="btn btn-outline-success btn-sm">Add to cart</a>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="text-muted mt-3">All products: {{ num_products }}</p>
+    </div>
+  </div>
+{% endblock content %}

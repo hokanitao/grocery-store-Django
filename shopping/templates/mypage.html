@@ -1,0 +1,45 @@
+{% extends "Master.html" %}
+
+
+{% block title %}
+  Mypage
+{% endblock title %}
+
+
+{% block content %}
+  {% if user.is_authenticated %}
+  <div class="container bg-light rounded-4 p-4 shadow-sm border border-success-subtle mt-4">
+    <p class="fs-5">👤 <strong class="text-success">Username:</strong> {{ user.username }}</p>
+    <hr>
+
+    <h4 class="text-success mb-3">🛒 Your Shopping Cart</h4>
+    {% if items %}
+      <ul class="list-group mb-3">
+        {% for item in items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ item.product.name }}  
+          <span class="text-muted">${{ item.product.price }} × {{ item.quantity }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <p class="fw-bold">Total Price: <span class="text-success">${{ total }}</span></p>
+      <p class="text-muted">🕒 Created at {{ created_at }}</p>
+
+      <a href="{% url "product_list" %}" class="btn btn-outline-success mt-3">Add More Products!</a>
+
+      {% if basket %}
+        <a href="{% url "buy" basket.id %}" class="btn btn-success mt-3 ms-2">Buy</a>
+      {% endif %}
+    
+    {% else %}
+      <p class="text-muted">Your shopping cart is empty.</p>
+      <a href="{% url "product_list" %}" class="btn btn-outline-success mt-3">Explore Products!</a>
+    {% endif %}
+    <hr>
+
+    <a href="{% url "history" %}" class="btn btn-outline-success mt-2">🧾 Shopping History</a><br>
+    <a href="{% url "logout" %}" class="btn btn-outline-secondary mt-2">🚪 Logout</a>
+  </div>
+  {% endif %}
+{% endblock content %}
