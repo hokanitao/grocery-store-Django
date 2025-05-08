@@ -119,6 +119,10 @@ def buy(request, pk):
     basket = Basket.objects.get(pk=pk)
     basket.basket_status = "pen"
     basket.save()
+    messages.success(
+        request,
+        " Now your shopping cart is pending. Please wait for the confirmation. Thank you for your purchase request!",
+    )
     return redirect("/mypage")
 
 
