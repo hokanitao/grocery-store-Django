@@ -10,12 +10,12 @@
   {% if user.is_authenticated %}
   <div class='container my-5'>
     <div class="card shadow-sm p-4 mb-4">
-      <h5 class="mb-3 text-primary">Staff Username: {{user.username}}</h5>
+      <h6 class="mb-3">Staff Username: {{user.username}}</h6>
 
       {% comment %} Shopping cart {% endcomment %}
-      <h6 class="text-muted">Basket Info</h6>
+      <h5 class="text-muted">Basket Info</h5>
       <p><strong>Basket ID:</strong> {{basket.id}}</p>
-      <p><strong>Basket Username:</strong> {{basket.user.username}}</p>
+      <p><strong>Username:</strong> {{basket.user.username}}</p>
 
       {% if basket %} {% comment %} if pending basket exist {% endcomment %}
         <ul class="list-group mb-3">
